@@ -38,7 +38,7 @@ return [
     (new Extend\Model(Discussion::class))
         ->relationship('recipientUsers', function ($discussion) {
             return $discussion->belongsToMany(User::class, 'recipients')
-                ->wherePivot('removed_at', null);
+                ->wherePivot('removed_at', '=', null);
         })
         ->relationship('oldRecipientUsers', function ($discussion) {
             return $discussion->belongsToMany(User::class, 'recipients')
@@ -46,7 +46,7 @@ return [
         })
         ->relationship('recipientGroups', function ($discussion) {
             return $discussion->belongsToMany(Group::class, 'recipients')
-                ->wherePivot('removed_at', null);
+                ->wherePivot('removed_at', '=', null);
         })
         ->relationship('oldRecipientGroups', function ($discussion) {
             return $discussion->belongsToMany(Group::class, 'recipients')
@@ -56,7 +56,7 @@ return [
     (new Extend\Model(User::class))
         ->relationship('privateDiscussions', function ($user) {
             return $user->belongsToMany(Discussion::class, 'recipients')
-                ->wherePivot('removed_at', null);
+                ->wherePivot('removed_at', '=', null);
         }),
 
     (new Extend\Model(Group::class))
